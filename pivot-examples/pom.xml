@@ -10,6 +10,7 @@
 	</parent>
 
 	<artifactId>pivot-examples</artifactId>
+	<packaging>bundle</packaging>
 
 	<name>${project.artifactId}</name>
 	<description>${project.name}</description>
