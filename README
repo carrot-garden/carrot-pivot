@@ -1,1 +1,32 @@
 builds apache pivot from trunk once a day
+
+	<repositories>
+		<repository>
+			<id>sonatype-oss-snapshots</id>
+			<name>Sonatype OSS Snapshots</name>
+			<url>http://oss.sonatype.org/content/repositories/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<properties>
+		<pivotVersion>2.1.0-SNAPSHOT</pivotVersion>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.carrotgarden</groupId>
+			<artifactId>pivot-wtk</artifactId>
+			<version>${pivotVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.carrotgarden</groupId>
+			<artifactId>pivot-wtk-skin-terra</artifactId>
+			<version>${pivotVersion}</version>
+		</dependency>
+	</dependencies>
