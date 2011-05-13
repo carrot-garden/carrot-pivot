@@ -46,6 +46,26 @@
 	</properties>
 
 
+	<build>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<!-- TODO review if these files belong here -->
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.bxml</include>
+					<include>**/*.html</include>
+					<include>**/*.Theme</include>
+				</includes>
+			</resource>
+		</resources>
+
+	</build>
+
+
 	<profiles>
 
 		<profile>
