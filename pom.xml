@@ -59,6 +59,8 @@
 					<include>**/*.bxml</include>
 					<include>**/*.html</include>
 					<include>**/*.Theme</include>
+					<include>**/*.json</include>
+					<include>**/*.png</include>
 				</includes>
 			</resource>
 		</resources>
