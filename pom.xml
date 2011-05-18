@@ -91,7 +91,7 @@
 								</goals>
 								<configuration>
 									<patches>
-										<patch>01-add-provider.patch</patch>
+										<patch>01-basic.patch</patch>
 									</patches>
 								</configuration>
 							</execution>
