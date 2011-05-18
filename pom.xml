@@ -71,6 +71,37 @@
 	<profiles>
 
 		<profile>
+			<id>patch</id>
+			<modules>
+			</modules>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-patch-plugin</artifactId>
+						<configuration>
+							<patchDirectory>patch</patchDirectory>
+						</configuration>
+						<executions>
+							<execution>
+								<id>patch</id>
+								<phase>process-sources</phase>
+								<goals>
+									<goal>apply</goal>
+								</goals>
+								<configuration>
+									<patches>
+										<patch>01-add-provider.patch</patch>
+									</patches>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
 
 			<id>update-from-apache-pivot</id>
 
