@@ -62,6 +62,7 @@
 					<include>**/*.json</include>
 					<include>**/*.png</include>
 					<include>**/*.svg</include>
+					<include>**/*.gif</include>
 				</includes>
 			</resource>
 			<resource>
