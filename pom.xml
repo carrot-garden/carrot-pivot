@@ -63,10 +63,16 @@
 					<include>**/*.png</include>
 				</includes>
 			</resource>
+			<resource>
+				<!-- TODO review if these files belong here -->
+				<directory>.</directory>
+				<includes>
+					<include>**/build.properties</include>
+				</includes>
+			</resource>
 		</resources>
 
 	</build>
-
 
 	<profiles>
 
