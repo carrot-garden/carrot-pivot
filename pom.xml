@@ -61,6 +61,7 @@
 					<include>**/*.Theme</include>
 					<include>**/*.json</include>
 					<include>**/*.png</include>
+					<include>**/*.svg</include>
 				</includes>
 			</resource>
 			<resource>
