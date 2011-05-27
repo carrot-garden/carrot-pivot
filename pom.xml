@@ -24,11 +24,11 @@
 		<module>pivot-wtk-charts</module>
 
 		<!-- optional -->
-		<module>pivot-demos</module>
-		<module>pivot-demos-server</module>
-		<module>pivot-examples</module>
-		<module>pivot-tutorials</module>
-		<module>pivot-tutorials-server</module>
+		<!-- <module>pivot-demos</module> -->
+		<!-- <module>pivot-demos-server</module> -->
+		<!-- <module>pivot-examples</module> -->
+		<!-- <module>pivot-tutorials</module> -->
+		<!-- <module>pivot-tutorials-server</module> -->
 
 	</modules>
 
