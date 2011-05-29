@@ -1,0 +1,35 @@
+--- wtk/src/org/apache/pivot/wtk/Container.java	2011-05-29 02:36:09.000000000 -0500
++++ wtk/src/org/apache/pivot/wtk/Container.java	2011-05-29 02:38:39.967871465 -0500
+@@ -844,13 +844,25 @@ public abstract class Container extends
+         return containerMouseListeners;
+     }
+
++    // PIVOT-747
++
++    private static Runnable assertRunner;
++
++    public static synchronized final void setAssertRunner(Runnable task){
++    	assertRunner = task;
++    }
++
++    public static synchronized final Runnable  getAssertRunner(){
++    	return assertRunner;
++    }
++
+     public static final void assertEventDispatchThread() {
+-        /* Currently, application startup happens on the main thread, so we need to allow
+-         * that thread to modify WTK state.
+-         */
+-        if (!java.awt.EventQueue.isDispatchThread()
+-             && !Thread.currentThread().getName().equals("main")) {
+-            throw new IllegalStateException("this method can only be called from the AWT event dispatch thread");
+-        }
++    	final Runnable task = assertRunner;
++    	if (task == null){
++    		return;
++    	} else {
++    		task.run();
++    	}
+     }
++
+ }

@@ -92,15 +92,28 @@
 									<target>
 										<property name="base" value="${basedir}/src" />
 										<property name="repo" value="${repodir}/src" />
+										<property name="file" value="${basedir}/patch/new.patch" />
+										<property name="mod" value="${repo-module}" />
 										<echo message="running diff" />
 										<echo message="base=${base}" />
 										<echo message="repo=${repo}" />
-										<exec executable="diff">
+										<exec executable="diff" output="${file}" error="${file}.diff"
+											osfamily="unix">
+											<arg value="--show-c-function" />
+											<arg value="--new-file" />
+											<arg value="--unified" />
 											<arg value="--recursive" />
 											<arg value="--exclude=.svn" />
 											<arg value="--" />
 											<arg value="${repo}" />
 											<arg value="${base}" />
+										</exec>
+										<exec executable="sed" error="${file}.sed" osfamily="unix">
+											<arg value="--expression=1d" />
+											<arg value="--expression=s|${base}|${mod}/src|g" />
+											<arg value="--expression=s|${repo}|${mod}/src|g" />
+											<arg value="--in-place" />
+											<arg value="${file}" />
 										</exec>
 									</target>
 								</configuration>
@@ -126,8 +139,8 @@
 									<goal>apply</goal>
 								</goals>
 								<configuration>
-									<patchDirectory>patch</patchDirectory>
-									<naturalOrderProcessing>true</naturalOrderProcessing>
+									<strip>2</strip>
+									<patchFile>patch/new.patch</patchFile>
 								</configuration>
 							</execution>
 						</executions>
