@@ -1,6 +1,6 @@
 .project
 .classpath
-.settings/
+# .settings/
 
 src/
 bin/
