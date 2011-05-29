@@ -24,11 +24,11 @@
 		<module>pivot-wtk-charts</module>
 
 		<!-- optional -->
-		<!-- <module>pivot-demos</module> -->
-		<!-- <module>pivot-demos-server</module> -->
-		<!-- <module>pivot-examples</module> -->
-		<!-- <module>pivot-tutorials</module> -->
-		<!-- <module>pivot-tutorials-server</module> -->
+		<module>pivot-demos</module>
+		<module>pivot-demos-server</module>
+		<module>pivot-examples</module>
+		<module>pivot-tutorials</module>
+		<module>pivot-tutorials-server</module>
 
 	</modules>
 
@@ -48,24 +48,26 @@
 
 	<build>
 
+		<sourceDirectory>${module-src-main-java}</sourceDirectory>
+
 		<resources>
 			<resource>
-				<directory>src/main/resources</directory>
+				<directory>${module-src-main-java}</directory>
 			</resource>
-			<resource>
-				<!-- TODO review if these files belong here -->
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.bxml</include>
-					<include>**/*.html</include>
-					<include>**/*.Theme</include>
-					<include>**/*.json</include>
-					<include>**/*.png</include>
-					<include>**/*.svg</include>
-					<include>**/*.gif</include>
-					<include>**/build.properties</include>
-				</includes>
-			</resource>
+			<!-- TODO review if these files belong here -->
+			<!-- <resource> -->
+			<!-- <directory>src/main/java</directory> -->
+			<!-- <includes> -->
+			<!-- <include>**/*.bxml</include> -->
+			<!-- <include>**/*.html</include> -->
+			<!-- <include>**/*.Theme</include> -->
+			<!-- <include>**/*.json</include> -->
+			<!-- <include>**/*.png</include> -->
+			<!-- <include>**/*.svg</include> -->
+			<!-- <include>**/*.gif</include> -->
+			<!-- <include>**/build.properties</include> -->
+			<!-- </includes> -->
+			<!-- </resource> -->
 		</resources>
 
 	</build>
@@ -73,28 +75,34 @@
 	<profiles>
 
 		<profile>
-			<id>patch</id>
-			<modules>
-			</modules>
+			<id>diff</id>
 			<build>
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-patch-plugin</artifactId>
-						<configuration>
-							<patchDirectory>patch</patchDirectory>
-						</configuration>
+						<artifactId>maven-antrun-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>patch</id>
+								<id>diff</id>
 								<phase>process-sources</phase>
 								<goals>
-									<goal>apply</goal>
+									<goal>run</goal>
 								</goals>
 								<configuration>
-									<patches>
-										<patch>01-basic.patch</patch>
-									</patches>
+									<target>
+										<property name="base" value="${basedir}/src" />
+										<property name="repo" value="${repodir}/src" />
+										<echo message="running diff" />
+										<echo message="base=${base}" />
+										<echo message="repo=${repo}" />
+										<exec executable="diff">
+											<arg value="--recursive" />
+											<arg value="--exclude=.svn" />
+											<arg value="--" />
+											<arg value="${repo}" />
+											<arg value="${base}" />
+										</exec>
+									</target>
 								</configuration>
 							</execution>
 						</executions>
@@ -104,8 +112,61 @@
 		</profile>
 
 		<profile>
+			<id>patch</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-patch-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>patch</id>
+								<phase>process-sources</phase>
+								<goals>
+									<goal>apply</goal>
+								</goals>
+								<configuration>
+									<patchDirectory>patch</patchDirectory>
+									<naturalOrderProcessing>true</naturalOrderProcessing>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 
-			<id>update-from-apache-pivot</id>
+		<profile>
+			<id>clean</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-clean-plugin</artifactId>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>src</directory>
+									<includes>
+										<include>**/*</include>
+									</includes>
+								</fileset>
+								<fileset>
+									<directory>test</directory>
+									<includes>
+										<include>**/*</include>
+									</includes>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+
+			<id>update</id>
 
 			<build>
 
@@ -156,14 +217,14 @@
 									<goal>copy-resources</goal>
 								</goals>
 								<configuration>
-									<overwrite>true</overwrite>
 									<resources>
 										<resource>
 											<directory>${repodir}/${module-src-main-java}</directory>
 											<filtering>false</filtering>
 										</resource>
 									</resources>
-									<outputDirectory>${basedir}/src/main/java</outputDirectory>
+									<overwrite>true</overwrite>
+									<outputDirectory>${basedir}/${module-src-main-java}</outputDirectory>
 								</configuration>
 							</execution>
 							<execution>
@@ -173,14 +234,14 @@
 									<goal>copy-resources</goal>
 								</goals>
 								<configuration>
-									<overwrite>true</overwrite>
 									<resources>
 										<resource>
 											<directory>${repodir}/${module-src-test-java}</directory>
 											<filtering>false</filtering>
 										</resource>
 									</resources>
-									<outputDirectory>${basedir}/src/test/java</outputDirectory>
+									<overwrite>true</overwrite>
+									<outputDirectory>${basedir}/${module-src-test-java}</outputDirectory>
 								</configuration>
 							</execution>
 						</executions>
