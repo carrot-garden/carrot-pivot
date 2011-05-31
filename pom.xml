@@ -53,6 +53,9 @@
 		<resources>
 			<resource>
 				<directory>${module-src-main-java}</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
 			</resource>
 			<!-- TODO review if these files belong here -->
 			<!-- <resource> -->
