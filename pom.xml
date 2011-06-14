@@ -50,14 +50,18 @@
 
 		<sourceDirectory>${module-src-main-java}</sourceDirectory>
 
+		<!-- TODO review if these files belong here -->
 		<resources>
 			<resource>
 				<directory>${module-src-main-java}</directory>
 				<includes>
 					<include>**/*</include>
 				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+					<exclude>**/*.scala</exclude>
+				</excludes>
 			</resource>
-			<!-- TODO review if these files belong here -->
 			<!-- <resource> -->
 			<!-- <directory>src/main/java</directory> -->
 			<!-- <includes> -->
