@@ -1,12 +1,13 @@
-# save settings to keep java edit prefs
-#.project
-#.classpath
-#.settings/
+# save settings to keep java edit prefs ?
+.project
+.classpath
+.settings/
 
 src/
 bin/
-target/
+log/
 logs/
+target/
 
 release.properties
 pom.xml.releaseBackup
