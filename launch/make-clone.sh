@@ -2,8 +2,8 @@
 
 cd /tmp
 
-git clone git://github.com/carrot-garden/carrot-apache-pivot.git
+git clone git://github.com/carrot-garden/carrot-pivot.git
 
-cd carrot-apache-pivot
+cd carrot-pivot
 
 mvn install  --activate-profiles update-from-apache-pivot
