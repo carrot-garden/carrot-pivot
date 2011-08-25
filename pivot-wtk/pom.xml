@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>pivot-wtk</artifactId>
-	<packaging>bundle</packaging>
+	<packaging>jar</packaging>
 
 	<name>${project.artifactId}</name>
 	<description>${project.name}</description>

@@ -10,6 +10,7 @@
 	</parent>
 
 	<artifactId>pivot-core-web-server</artifactId>
+	<packaging>jar</packaging>
 
 	<name>${project.artifactId}</name>
 	<description>${project.name}</description>
